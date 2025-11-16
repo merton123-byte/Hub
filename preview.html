@@ -1,0 +1,698 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Birdies Hub Prototype</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-cream: #FFF5E4;
+      --birdies-green: #1F4C25;
+      --birdies-orange: #EC622D;
+      --text-body: #111111;
+      --card-bg: #FFFFFF;
+      --border-subtle: #E3D6C3;
+    }
+
+    * {
+      box-sizing: border-box;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    body {
+      margin: 0;
+      font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+      background: var(--bg-cream);
+      color: var(--text-body);
+    }
+
+    .app {
+      max-width: 430px;
+      margin: 0 auto;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      background: var(--bg-cream);
+    }
+
+    /* Header */
+    .app-header {
+      padding: 16px 20px 8px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .logo-box {
+      width: 36px;
+      height: 36px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .logo-box span {
+      font-family: 'Anton', sans-serif;
+      font-size: 30px;
+      line-height: 1;
+      color: var(--birdies-orange);
+    }
+
+    .header-text {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .header-title {
+      font-family: 'Anton', sans-serif;
+      font-size: 20px;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      color: var(--birdies-green);
+    }
+
+    .header-subtitle {
+      font-size: 12px;
+      opacity: 0.75;
+    }
+
+    /* Content area */
+    .content {
+      flex: 1;
+      padding: 4px 16px 72px;
+    }
+
+    h2.section-title {
+      font-family: 'Anton', sans-serif;
+      font-size: 18px;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      margin: 4px 0 10px;
+      color: var(--birdies-green);
+    }
+
+    .card {
+      background: var(--card-bg);
+      border-radius: 14px;
+      padding: 14px 14px 12px;
+      margin-bottom: 12px;
+      box-shadow: 0 6px 14px rgba(0,0,0,0.04);
+      border: 1px solid rgba(0,0,0,0.03);
+    }
+
+    .card-label {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: rgba(0,0,0,0.5);
+      margin-bottom: 6px;
+    }
+
+    .card-title-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 12px;
+      margin-bottom: 6px;
+    }
+
+    .card-title {
+      font-weight: 600;
+      font-size: 15px;
+    }
+
+    .card-meta {
+      font-size: 11px;
+      color: rgba(0,0,0,0.6);
+    }
+
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 11px;
+      padding: 4px 9px;
+      border-radius: 999px;
+      background: rgba(236,98,45,0.08);
+      color: var(--birdies-orange);
+      font-weight: 500;
+    }
+
+    .pill-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--birdies-orange);
+    }
+
+    .metric-row {
+      display: flex;
+      justify-content: space-between;
+      gap: 10px;
+      font-size: 12px;
+      margin-top: 8px;
+    }
+
+    .metric {
+      flex: 1;
+    }
+
+    .metric-label {
+      font-size: 11px;
+      color: rgba(0,0,0,0.5);
+      margin-bottom: 2px;
+    }
+
+    .metric-value {
+      font-weight: 600;
+      font-size: 13px;
+    }
+
+    .small {
+      font-size: 11px;
+    }
+
+    .cta-row {
+      margin-top: 10px;
+      display: flex;
+      gap: 8px;
+    }
+
+    .btn {
+      flex: 1;
+      border-radius: 999px;
+      padding: 8px 10px;
+      font-size: 12px;
+      font-weight: 600;
+      border: none;
+      cursor: pointer;
+    }
+
+    .btn-primary {
+      background: var(--birdies-green);
+      color: white;
+    }
+
+    .btn-ghost {
+      background: transparent;
+      color: var(--birdies-green);
+      border: 1px solid rgba(31,76,37,0.28);
+    }
+
+    .list-item {
+      padding: 8px 0;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid rgba(0,0,0,0.03);
+    }
+
+    .list-item:last-child {
+      border-bottom: none;
+    }
+
+    .list-main {
+      font-size: 13px;
+      font-weight: 500;
+    }
+
+    .list-sub {
+      font-size: 11px;
+      color: rgba(0,0,0,0.6);
+    }
+
+    .list-badge {
+      font-size: 11px;
+      padding: 4px 8px;
+      border-radius: 999px;
+      background: rgba(31,76,37,0.08);
+      color: var(--birdies-green);
+      font-weight: 500;
+    }
+
+    /* Tabs */
+    .tab {
+      display: none;
+      animation: fadeIn 0.2s ease-out;
+    }
+
+    .tab.active {
+      display: block;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(6px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Bottom nav */
+    .bottom-nav {
+      position: fixed;
+      left: 50%;
+      transform: translateX(-50%);
+      bottom: 0;
+      max-width: 430px;
+      width: 100%;
+      padding: 6px 14px 10px;
+      background: rgba(255,245,228,0.96);
+      backdrop-filter: blur(18px);
+      border-top: 1px solid rgba(0,0,0,0.04);
+    }
+
+    .nav-inner {
+      display: flex;
+      justify-content: space-between;
+      gap: 4px;
+    }
+
+    .nav-item {
+      flex: 1;
+      text-align: center;
+      padding: 6px 4px 4px;
+      border-radius: 999px;
+      font-size: 11px;
+      cursor: pointer;
+      color: rgba(0,0,0,0.55);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 2px;
+    }
+
+    .nav-item span.icon {
+      font-size: 17px;
+    }
+
+    .nav-item.active {
+      background: rgba(31,76,37,0.08);
+      color: var(--birdies-green);
+      font-weight: 600;
+    }
+  </style>
+</head>
+<body>
+<div class="app">
+  <header class="app-header">
+    <div class="logo-box">
+      <span>B</span>
+    </div>
+    <div class="header-text">
+      <div class="header-title">Birdies Hub</div>
+      <div class="header-subtitle">League performance, made simple.</div>
+    </div>
+  </header>
+
+  <main class="content">
+    <!-- HOME TAB -->
+    <section id="tab-home" class="tab active">
+      <h2 class="section-title">This Week</h2>
+
+      <div class="card">
+        <div class="card-label">Your League Status</div>
+        <div class="card-title-row">
+          <div>
+            <div class="card-title">Week 3 · 4Hunters Championship</div>
+            <div class="card-meta">Rounds played: 1 of 2</div>
+          </div>
+          <div class="pill">
+            <span class="pill-dot"></span>
+            📈 Improving
+          </div>
+        </div>
+
+        <div class="metric-row">
+          <div class="metric">
+            <div class="metric-label">Current handicap</div>
+            <div class="metric-value">+5.2</div>
+            <div class="small">From +6.1 last week</div>
+          </div>
+          <div class="metric">
+            <div class="metric-label">Position</div>
+            <div class="metric-value">12th</div>
+            <div class="small">Top 30% of field</div>
+          </div>
+          <div class="metric">
+            <div class="metric-label">Rounds left</div>
+            <div class="metric-value">1</div>
+            <div class="small">Closes Sunday</div>
+          </div>
+        </div>
+
+        <div class="cta-row">
+          <button class="btn btn-primary" data-tab-target="tab-league">View leaderboard</button>
+          <button class="btn btn-ghost" data-tab-target="tab-rounds">Last round</button>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-label">Your Last Round</div>
+        <div class="card-title-row">
+          <div>
+            <div class="card-title">Cabot Links · 78 (+6)</div>
+            <div class="card-meta">Birdies League · Week 3 · Round 1</div>
+          </div>
+        </div>
+        <div class="metric-row">
+          <div class="metric">
+            <div class="metric-label">Fairways</div>
+            <div class="metric-value">57%</div>
+            <div class="small">+5% vs avg</div>
+          </div>
+          <div class="metric">
+            <div class="metric-label">GIR</div>
+            <div class="metric-value">44%</div>
+            <div class="small">-3% vs avg</div>
+          </div>
+          <div class="metric">
+            <div class="metric-label">Putts</div>
+            <div class="metric-value">31</div>
+            <div class="small">Best of last 5</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-label">Next at Birdies</div>
+        <div class="card-title-row">
+          <div>
+            <div class="card-title">Bay 3 · Tonight 6:10pm</div>
+            <div class="card-meta">Birdies Bayside · 18 holes · League round</div>
+          </div>
+        </div>
+        <div class="cta-row">
+          <button class="btn btn-ghost">View booking</button>
+          <button class="btn btn-ghost">Birdies guide</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ROUNDS TAB -->
+    <section id="tab-rounds" class="tab">
+      <h2 class="section-title">My Rounds</h2>
+
+      <div class="card">
+        <div class="card-label">Recent league rounds</div>
+
+        <div class="list-item" data-open-round="1">
+          <div>
+            <div class="list-main">Cabot Links · 78 (+6)</div>
+            <div class="list-sub">Week 3 · Round 1 · Birdies League</div>
+          </div>
+          <div class="list-badge">Best putting</div>
+        </div>
+
+        <div class="list-item" data-open-round="2">
+          <div>
+            <div class="list-main">Pebble Beach · 82 (+10)</div>
+            <div class="list-sub">Week 2 · Round 2</div>
+          </div>
+          <div class="list-badge">Windy</div>
+        </div>
+
+        <div class="list-item" data-open-round="3">
+          <div>
+            <div class="list-main">TPC Sawgrass · 80 (+8)</div>
+            <div class="list-sub">Week 2 · Round 1</div>
+          </div>
+          <div class="list-badge">Fairway finder</div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-label">Summary</div>
+        <div class="metric-row">
+          <div class="metric">
+            <div class="metric-label">Last 5 avg</div>
+            <div class="metric-value">80.4</div>
+            <div class="small">Down 1.6 shots</div>
+          </div>
+          <div class="metric">
+            <div class="metric-label">Best round</div>
+            <div class="metric-value">76 (+4)</div>
+            <div class="small">Cabot Links</div>
+          </div>
+          <div class="metric">
+            <div class="metric-label">Rounds played</div>
+            <div class="metric-value">7</div>
+            <div class="small">This tour</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- STATS TAB -->
+    <section id="tab-stats" class="tab">
+      <h2 class="section-title">Trend & Stats</h2>
+
+      <div class="card">
+        <div class="card-label">Handicap trend</div>
+        <div class="card-title-row">
+          <div>
+            <div class="card-title">You’re trending the right way</div>
+            <div class="card-meta">Last 8 league rounds</div>
+          </div>
+          <div class="pill">
+            <span class="pill-dot"></span>
+            -1.3 strokes
+          </div>
+        </div>
+        <div class="small" style="margin-top:6px;">
+          Simple visual would go here: line drifting down from +7.0 → +5.7 over last 8 rounds.
+        </div>
+        <div class="metric-row">
+          <div class="metric">
+            <div class="metric-label">Current hcp</div>
+            <div class="metric-value">+5.7</div>
+          </div>
+          <div class="metric">
+            <div class="metric-label">Best hcp</div>
+            <div class="metric-value">+5.2</div>
+          </div>
+          <div class="metric">
+            <div class="metric-label">Worst hcp</div>
+            <div class="metric-value">+7.4</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-label">Area breakdown</div>
+        <div class="metric-row">
+          <div class="metric">
+            <div class="metric-label">Driving</div>
+            <div class="metric-value">▲ Solid</div>
+            <div class="small">Fairways +6% vs tour avg</div>
+          </div>
+          <div class="metric">
+            <div class="metric-label">Approach</div>
+            <div class="metric-value">▬ Stable</div>
+            <div class="small">GIR in line with avg</div>
+          </div>
+          <div class="metric">
+            <div class="metric-label">Putting</div>
+            <div class="metric-value">★ Strength</div>
+            <div class="small">1.2 strokes gained</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-label">Streaks</div>
+        <div class="list-item">
+          <div>
+            <div class="list-main">Weekly play streak</div>
+            <div class="list-sub">You’ve played 4 weeks in a row</div>
+          </div>
+          <div class="list-badge">Keep it going</div>
+        </div>
+        <div class="list-item">
+          <div>
+            <div class="list-main">Best improvement week</div>
+            <div class="list-sub">Week 2: -3.4 vs previous week</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- LEAGUE TAB -->
+    <section id="tab-league" class="tab">
+      <h2 class="section-title">League</h2>
+
+      <div class="card">
+        <div class="card-label">4Hunters Championship</div>
+        <div class="card-title-row">
+          <div>
+            <div class="card-title">You’re currently 12th</div>
+            <div class="card-meta">Birdies League · Gross standings</div>
+          </div>
+        </div>
+        <div class="metric-row">
+          <div class="metric">
+            <div class="metric-label">Events played</div>
+            <div class="metric-value">3 / 6</div>
+          </div>
+          <div class="metric">
+            <div class="metric-label">Best finish</div>
+            <div class="metric-value">T4</div>
+          </div>
+          <div class="metric">
+            <div class="metric-label">Points</div>
+            <div class="metric-value">145</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-label">Top of the board</div>
+
+        <div class="list-item">
+          <div>
+            <div class="list-main">1. Daniel Dowling</div>
+            <div class="list-sub">-12 total · 3 events</div>
+          </div>
+          <div class="list-badge">Leader</div>
+        </div>
+        <div class="list-item">
+          <div>
+            <div class="list-main">2. Joe Lagowski</div>
+            <div class="list-sub">-10 total · 3 events</div>
+          </div>
+          <div class="list-badge">Chasing</div>
+        </div>
+        <div class="list-item">
+          <div>
+            <div class="list-main">3. Bailey Cathro</div>
+            <div class="list-sub">-8 total · 3 events</div>
+          </div>
+          <div class="list-badge">In form</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PROFILE TAB -->
+    <section id="tab-profile" class="tab">
+      <h2 class="section-title">Profile</h2>
+
+      <div class="card">
+        <div class="card-label">Your details</div>
+        <div class="card-title-row">
+          <div>
+            <div class="card-title">Sam Merton</div>
+            <div class="card-meta">Birdies Member · Birdie Tier</div>
+          </div>
+        </div>
+        <div class="metric-row">
+          <div class="metric">
+            <div class="metric-label">Birdies ID</div>
+            <div class="metric-value">BB-1042</div>
+          </div>
+          <div class="metric">
+            <div class="metric-label">SGT Username</div>
+            <div class="metric-value">Sam_Birdies</div>
+          </div>
+          <div class="metric">
+            <div class="metric-label">Home club</div>
+            <div class="metric-value">Birdies Bayside</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-label">Membership</div>
+        <div class="metric-row">
+          <div class="metric">
+            <div class="metric-label">Tier</div>
+            <div class="metric-value">Birdie</div>
+            <div class="small">League access included</div>
+          </div>
+          <div class="metric">
+            <div class="metric-label">Renewal</div>
+            <div class="metric-value">14 Dec 2025</div>
+          </div>
+          <div class="metric">
+            <div class="metric-label">Perks</div>
+            <div class="metric-value">View</div>
+            <div class="small">Unlimited off-peak</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-label">Settings</div>
+        <div class="list-item">
+          <div>
+            <div class="list-main">Email preferences</div>
+            <div class="list-sub">Round summaries, leaderboard updates</div>
+          </div>
+        </div>
+        <div class="list-item">
+          <div>
+            <div class="list-main">Connect GolfManager</div>
+            <div class="list-sub">Use your GM login to auto-link bookings</div>
+          </div>
+          <div class="list-badge">Coming soon</div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Bottom nav -->
+  <nav class="bottom-nav">
+    <div class="nav-inner">
+      <div class="nav-item active" data-tab="tab-home">
+        <span class="icon">🏠</span>
+        <span>Home</span>
+      </div>
+      <div class="nav-item" data-tab="tab-rounds">
+        <span class="icon">🏌️‍♂️</span>
+        <span>Rounds</span>
+      </div>
+      <div class="nav-item" data-tab="tab-stats">
+        <span class="icon">📈</span>
+        <span>Stats</span>
+      </div>
+      <div class="nav-item" data-tab="tab-league">
+        <span class="icon">🏆</span>
+        <span>League</span>
+      </div>
+      <div class="nav-item" data-tab="tab-profile">
+        <span class="icon">👤</span>
+        <span>Profile</span>
+      </div>
+    </div>
+  </nav>
+</div>
+
+<script>
+  // Bottom nav tab switching
+  const navItems = document.querySelectorAll('.nav-item');
+  const tabs = document.querySelectorAll('.tab');
+
+  function activateTab(tabId) {
+    tabs.forEach(t => t.classList.toggle('active', t.id === tabId));
+    navItems.forEach(n => n.classList.toggle('active', n.dataset.tab === tabId));
+    // Scroll content to top when changing tab
+    document.querySelector('.content').scrollTo({ top: 0, behavior: 'instant' });
+  }
+
+  navItems.forEach(item => {
+    item.addEventListener('click', () => {
+      const tabId = item.dataset.tab;
+      if (tabId) activateTab(tabId);
+    });
+  });
+
+  // Buttons that jump to tabs (e.g. "View leaderboard")
+  document.querySelectorAll('[data-tab-target]').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const target = btn.getAttribute('data-tab-target');
+      if (target) activateTab(target);
+    });
+  });
+
+  // Future: hook up round detail modal / page based on data-open-round attribute
+</script>
+</body>
+</html>
